@@ -45,7 +45,9 @@ export const useRiddleStore = create<State & Actions>()(
           data.forEach((obj: Riddle) => (obj.id = uuid()));
           set({ riddles: data, loading: false });
         } catch (error) {
-          set({ error: error.message, loading: false });
+          if (error instanceof Error) {
+            set({ error: error.message, loading: false });
+          }
         }
       },
       addRiddle: (riddle: Riddle) => {
