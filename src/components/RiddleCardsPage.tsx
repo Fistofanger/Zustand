@@ -4,10 +4,12 @@ import RiddleCardPage from '@/components/RiddleCardPage';
 import { useRiddleStore } from '@/store/useRiddleStore';
 
 export default function RiddleCardsPage() {
-  const { riddles, deleteRiddle } = useRiddleStore();
+  const { riddles,loading, error, deleteRiddle } = useRiddleStore();
   return (
     <div className="grid grid-cols-4 gap-4 ">
-        {riddles &&
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      {riddles &&
         riddles.map((riddle) => (
           <RiddleCardPage
             key={riddle.title}
